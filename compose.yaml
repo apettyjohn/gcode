@@ -28,8 +28,6 @@ services:
       # Persistent workspace: where Gcode clones repos & creates projects
       # This volume is user-scoped and survives container restarts
       - workspace:/workspace
-      # Persistent data (knowledge, learnings, etc.)
-      - gcode-data:/data
     environment:
       - RUNTIME_ENV=dev
       - AGNO_DEBUG=True
@@ -60,4 +58,3 @@ networks:
 volumes:
   pgdata:
   workspace:
-  gcode-data:

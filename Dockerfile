@@ -3,7 +3,6 @@
 # ===========================================================================
 # Runs as a non-root user (gcode) with filesystem access restricted to:
 #   /workspace  - persistent volume for cloned repos, worktrees, projects
-#   /data       - persistent volume for knowledge, learnings
 #   /app        - read-only application code (writable only in dev via bind mount)
 # ===========================================================================
 
@@ -44,12 +43,11 @@ ENV PYTHONPATH=/app
 # Directory setup & permissions
 # ---------------------------------------------------------------------------
 # /workspace - agent's persistent coding workspace (Docker volume)
-# /data      - persistent data for knowledge/learnings (Docker volume)
-RUN mkdir -p /workspace /data \
-    && chown -R gcode:gcode /workspace /data \
+RUN mkdir -p /workspace \
+    && chown -R gcode:gcode /workspace \
     && chmod 755 /app
 
-# Ensure the gcode user CANNOT write outside /workspace and /data
+# Ensure the gcode user CANNOT write outside /workspace
 # /app is readable but not writable (agent can read its own code, not modify it)
 # Everything else is owned by root and not writable by gcode
 

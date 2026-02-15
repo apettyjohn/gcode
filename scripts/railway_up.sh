@@ -76,9 +76,14 @@ railway add --service gcode \
     --variables 'DB_DATABASE=${{pgvector.PGDATABASE}}' \
     --variables "DB_DRIVER=postgresql+psycopg" \
     --variables "WAIT_FOR_DB=True" \
-    --variables "DATA_DIR=/data" \
+    --variables "WORKSPACE_DIR=/workspace" \
     --variables "OPENAI_API_KEY=${OPENAI_API_KEY}" \
     --variables "PORT=8000"
+
+echo ""
+echo -e "${BOLD}Adding persistent volume...${NC}"
+echo ""
+railway volume add -m /workspace 2>/dev/null || echo -e "${DIM}Volume already exists or skipped${NC}"
 
 echo ""
 echo -e "${BOLD}Deploying application...${NC}"
