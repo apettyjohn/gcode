@@ -1,0 +1,6 @@
+chat:
+  quick_prompts:
+    gcode:
+      - "Create a new project called 'url-shortener'. Build a Python URL shortener with FastAPI and an in-memory store. Include tests."
+      - "What projects exist in the workspace? Show me a summary of each."
+      - "Read the test output for the last project I worked on and fix any failing tests."
