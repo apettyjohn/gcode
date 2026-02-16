@@ -4,10 +4,10 @@ A lightweight coding agent that writes, reviews, and iterates on code. Gets shar
 
 Gcode operates inside a container with a persistent workspace volume. Each project is a git repo. Each task gets its own worktree. All code persists across container restarts.
 
-## Quick Start
+## Get Started
 
 ```sh
-# Clone this repo
+# Clone the repo
 git clone https://github.com/agno-agi/gcode.git && cd gcode
 
 # Add OPENAI_API_KEY
@@ -68,6 +68,40 @@ Gcode can clone and push to GitHub repos using a fine-grained Personal Access To
 
 See [GITHUB_ACCESS.md](GITHUB_ACCESS.md) for setup instructions.
 
+## Deploy to Railway
+
+Requires:
+- [Railway CLI](https://docs.railway.com/guides/cli)
+- `OPENAI_API_KEY` set in your environment
+
+```sh
+railway login
+
+./scripts/railway_up.sh
+```
+
+The script provisions PostgreSQL, configures environment variables, and deploys your application.
+
+### Connect to the Web UI
+
+1. Open [os.agno.com](https://os.agno.com)
+2. Click "Add OS" → "Live"
+3. Enter your Railway domain
+
+### Manage deployment
+
+```sh
+railway logs --service agent_os      # View logs
+railway open                         # Open dashboard
+railway up --service agent_os -d     # Update after changes
+```
+
+To stop services:
+```sh
+railway down --service agent_os
+railway down --service pgvector
+```
+
 ## Architecture
 
 ```
@@ -88,10 +122,21 @@ gcode/
 
 ## Local Development
 
+For development without Docker:
+
 ```sh
-./scripts/venv_setup.sh && source .venv/bin/activate
+# Install uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Setup environment
+./scripts/venv_setup.sh
+source .venv/bin/activate
+
+# Start PostgreSQL (required)
 docker compose up -d gcode-db
-python -m gcode  # CLI mode
+
+# Run the app
+python -m app.main
 ```
 
 ## Environment Variables
@@ -102,7 +147,7 @@ python -m gcode  # CLI mode
 | `GITHUB_TOKEN` | No | Fine-grained PAT for cloning/pushing repos |
 | `DB_*` | No | Database config (defaults to localhost) |
 
-## Further Reading
+## Learn More
 
 - [Agno Docs](https://docs.agno.com)
 - [Discord](https://agno.com/discord)
