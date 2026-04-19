@@ -22,7 +22,7 @@ from agno.learn import (
     LearningMachine,
     LearningMode,
 )
-from agno.models.openai import OpenAIResponses
+from agno.models.openrouter import OpenRouter
 from agno.tools.coding import CodingTools
 from agno.tools.reasoning import ReasoningTools
 
@@ -236,7 +236,7 @@ git log later.\
 gcode = Agent(
     id="gcode",
     name="Gcode",
-    model=OpenAIResponses(id="gpt-5.2"),
+    model=OpenRouter(id="x-ai/grok-4.1-fast"),
     db=agent_db,
     instructions=instructions,
     knowledge=gcode_knowledge,

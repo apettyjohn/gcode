@@ -18,6 +18,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # ---------------------------------------------------------------------------
+# Install UV (faster pip alternative)
+# ---------------------------------------------------------------------------
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# ---------------------------------------------------------------------------
 # Git configuration (safe defaults for agent use)
 # ---------------------------------------------------------------------------
 RUN git config --system init.defaultBranch main \
@@ -34,9 +40,8 @@ RUN groupadd -r gcode && useradd -r -g gcode -m -s /bin/bash gcode
 # Application code
 # ---------------------------------------------------------------------------
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
+RUN uv pip install --system -e . --no-cache
 ENV PYTHONPATH=/app
 
 # ---------------------------------------------------------------------------

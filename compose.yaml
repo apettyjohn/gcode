@@ -9,7 +9,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5433}:5432"
     networks:
       - gcode
 
@@ -41,7 +41,7 @@ services:
       - WAIT_FOR_DB=True
       - PRINT_ENV_ON_LOAD=True
       # API keys
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
       - GITHUB_TOKEN=${GITHUB_TOKEN:-}
       # Workspace config
       - WORKSPACE_DIR=/workspace
