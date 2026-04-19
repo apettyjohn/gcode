@@ -19,9 +19,9 @@ services:
       dockerfile: Dockerfile
     image: ${IMAGE_NAME:-gcode}:${IMAGE_TAG:-latest}
     container_name: gcode-api
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       # Hot-reload: mount source code
       - .:/app

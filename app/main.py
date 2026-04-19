@@ -15,6 +15,12 @@ from agno.os import AgentOS
 
 from db import get_postgres_db
 from gcode.agent import gcode
+from agno.os.interfaces.agui import AGUI
+
+# ---------------------------------------------------------------------------
+# Interfaces
+# ---------------------------------------------------------------------------
+interfaces: list = [AGUI(agent=gcode)]
 
 # ---------------------------------------------------------------------------
 # Create AgentOS
@@ -22,6 +28,7 @@ from gcode.agent import gcode
 agent_os = AgentOS(
     name="Gcode",
     agents=[gcode],
+    interfaces=interfaces,
     tracing=True,
     scheduler=True,
     db=get_postgres_db(),
