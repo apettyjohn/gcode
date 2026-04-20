@@ -25,6 +25,7 @@ from agno.learn import (
 from agno.models.openrouter import OpenRouter
 from agno.tools.coding import CodingTools
 from agno.tools.reasoning import ReasoningTools
+from agno.tools.python import PythonTools
 
 from db import create_knowledge, get_postgres_db
 
@@ -246,7 +247,11 @@ gcode = Agent(
         knowledge=gcode_learnings,
         learned_knowledge=LearnedKnowledgeConfig(mode=LearningMode.AGENTIC),
     ),
-    tools=[CodingTools(base_dir=WORKSPACE, all=True), ReasoningTools()],
+    tools=[
+        CodingTools(base_dir=WORKSPACE, all=True), 
+        ReasoningTools(),
+        PythonTools(base_dir=WORKSPACE),
+    ],
     add_datetime_to_context=True,
     add_history_to_context=True,
     read_chat_history=True,

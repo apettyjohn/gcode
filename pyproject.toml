@@ -19,6 +19,8 @@ dependencies = [
     "opentelemetry-sdk",
     "openinference-instrumentation-agno",
     "ag-ui-protocol>=0.1.16",
+    "strands-agents[a2a]>=1.36.0",
+    "a2a-protocol>=0.1.0",
 ]
 
 [project.optional-dependencies]
