@@ -27,10 +27,7 @@ scheduler_base_url = getenv("AGENTOS_URL", "http://127.0.0.1:8001")
 # ---------------------------------------------------------------------------
 # Interfaces
 # ---------------------------------------------------------------------------
-interfaces: list = [
-    AGUI(agent=gcode),
-    A2A(agents=[gcode])
-]
+interfaces: list = [AGUI(agent=gcode)]
 
 TELEGRAM_TOKEN = getenv("TELEGRAM_TOKEN", "")
 if TELEGRAM_TOKEN:
@@ -63,6 +60,7 @@ agent_os = AgentOS(
     scheduler_base_url=scheduler_base_url,
     db=get_postgres_db(),
     config=str(Path(__file__).parent / "config.yaml"),
+    a2a_interface=True,
 )
 
 app = agent_os.get_app()
