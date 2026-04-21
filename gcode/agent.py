@@ -237,7 +237,7 @@ git log later.\
 gcode = Agent(
     id="gcode",
     name="Gcode",
-    model=OpenRouter(id=getenv("GCODE_MODEL", "x-ai/grok-4.1-fast")),
+    model=OpenRouter(id=getenv("GCODE_MODEL", "x-ai/grok-4.1-fast"), max_tokens=1500000),
     db=agent_db,
     instructions=instructions,
     knowledge=gcode_knowledge,
