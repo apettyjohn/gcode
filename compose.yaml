@@ -11,7 +11,7 @@ services:
     ports:
       - "${DB_PORT:-5433}:5432"
     networks:
-      - gcode
+      - agent-network
 
   gcode-api:
     build:
@@ -51,12 +51,13 @@ services:
     depends_on:
       - gcode-db
     networks:
-      - gcode
+      - agent-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
 
 networks:
-  gcode:
+  agent-network:
+    external: true
 
 volumes:
   pgdata:
